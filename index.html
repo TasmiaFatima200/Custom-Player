@@ -1,0 +1,95 @@
+
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Video Player Task</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div id="video-section">
+      <video id="player" width = "800" height = "460">
+        <source src = "videoplayback.mp4" type = "video/mp4">
+         This browser doesn't support video tag.
+      </video>
+    </div>
+    <div class="orange-bar">
+      <div class="orange-juice"></div>
+    </div>
+    <!-- <div class="progress mb-2" style="max-width: 800px">
+      <div class="progress-bar" style="width:70%;"></div>
+    </div> -->
+    <button class="btn btn-success" id="play">Play</button>
+    <button class="btn btn-dark" id="pause">Pause</button>
+    <button class="btn btn-danger" id="sound">Mute / Unmute</button>
+    <button class="btn btn-success" id="restart">Restart</button>
+    <button class="btn btn-info" id="skip">Skip 5 Seconds</button>
+  </div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var player = document.getElementById('player');
+    var juice = document.querySelector('.orange-juice');
+    var subtitles = document.getElementById('subtitles');
+
+    $('#play').on('click', function() {
+      player.play();
+    });
+
+    $('#pause').on('click', function() {
+      player.pause();
+    });
+
+    $('#sound').on('click', function() {
+      if (player.muted == true) {
+        player.muted = false;
+      } else {
+        player.muted = true;
+      }
+    });
+
+    $('#restart').on('click', function() {
+      player.currentTime = 0;
+    });
+
+    $('#skip').on('click', function() {
+      // if video has more than 5 seconds remaining
+      if ((player.duration - player.currentTime) > 5) {
+        player.currentTime = player.currentTime + 10;
+      } else {
+        // since there are less than 5 seconds remaining, restart video
+        player.currentTime = 0;
+      }
+    });
+
+
+     player.addEventListener('timeupdate', function(){
+     var juicePos = player.currentTime / player.duration;
+        juice.style.width = juicePos * 100 + "%";
+
+   })
+
+     for (var i = 0; i < movie.srt.length; i++) {
+   video.textTracks[i].mode = 'hidden';
+}
+
+  </script>
+</body>
+<style>
+  .orange-bar{
+  height: 10px;
+  top: 0;
+  left: 0;
+  width: 800px;
+  background: white;
+}
+
+.orange-juice{
+  height: 10px;
+  background-color: orangered;
+}
+</style>
+</html>
